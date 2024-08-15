@@ -4,11 +4,14 @@ from itertools import product
 
 filename = "benchmark"
 trials = 1
-options_program = ['loop', 'fibonacci', 'tendermint', 'reth1', 'reth2']
+# options_program = ['loop', 'fibonacci', 'tendermint', 'reth1', 'reth2']
+# options_program = ['tendermint', 'reth1', 'reth2']
+options_program = ['reth1']
 options_prover = ["sp1", "risc0"]
 options_hashfn = ['poseidon']
 options_shard_size = [22]
-options_block_1 = "17106222"
+# options_block_1 = "17106222"
+options_block_1 = "19422264"
 options_block_2 = "19409768"
 
 option_combinations = product(options_program, options_prover, options_hashfn, options_shard_size)
