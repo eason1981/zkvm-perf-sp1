@@ -121,6 +121,7 @@ fn main() {
                 "compress_prove_duration",
                 "compress_verify_duration",
                 "compress_proof_size",
+                "bn254_proof_size",
             ])
             .unwrap();
     }
@@ -141,6 +142,7 @@ fn main() {
             report.compress_prove_duration.to_string(),
             report.compress_verify_duration.to_string(),
             report.compress_proof_size.to_string(),
+            report.bn254_proof_size.to_string(),
         ])
         .unwrap();
     writer.flush().unwrap();
