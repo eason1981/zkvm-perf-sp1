@@ -85,6 +85,16 @@ impl SP1Evaluator {
         let compress_bytes = bincode::serialize(&compress_proof).unwrap();
         println!("recursive proof size: {}", compress_bytes.len());
 
+        let compress_start = std::time::Instant::now();
+        let compressed_proof = prover.shrink(compress_proof, opts).unwrap();
+        let compress_duration = compress_start.elapsed();
+        let compressed_proof_size = bincode::serialize(&compressed_proof).unwrap();
+
+        let wrapped_bn_254_start = std::time::Instant::now();
+        let wrapped_bn_254_proof = prover.wrap_bn254(compressed_proof, opts).unwrap();
+        let wrapped_bn_254_duration = wrapped_bn_254_start.elapsed();
+        let wrapped_bn_254_proof_size = bincode::serialize(&wrapped_bn_254_proof).unwrap();
+
         let prove_duration = prove_core_duration + compress_duration;
 
         // Create the performance report.
@@ -104,6 +114,7 @@ impl SP1Evaluator {
             compress_prove_duration: compress_duration.as_secs_f64(),
             compress_verify_duration: 0.0, // TODO: fill this in.
             compress_proof_size: compress_bytes.len(),
+            bn254_proof_size: wrapped_bn_254_proof_size.len(),
         }
     }
 }

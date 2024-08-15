@@ -69,6 +69,8 @@ pub struct PerformanceReport {
     pub compress_verify_duration: f64,
     /// The size of the recursive proof in bytes.
     pub compress_proof_size: usize,
+    /// The size of the bn254 proof in bytes.
+    pub bn254_proof_size: usize,
 }
 
 fn main() {

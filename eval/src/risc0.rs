@@ -93,6 +93,8 @@ impl Risc0Evaluator {
         let recursive_proof_size = succinct_receipt.seal.len() * 4;
         let prove_duration = core_prove_duration + compress_duration;
 
+        let bn254_proof = prover.identity_p254(&succinct_receipt).unwrap();
+
         // Create the performance report.
         PerformanceReport {
             program: args.program.to_string(),
@@ -110,6 +112,7 @@ impl Risc0Evaluator {
             compress_prove_duration: compress_duration.as_secs_f64(),
             compress_verify_duration: recursive_verify_duration.as_secs_f64(),
             compress_proof_size: recursive_proof_size,
+            bn254_proof_size: bn254_proof.seal.len() * 4,
         }
     }
 }
